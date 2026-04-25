@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Sign In — NewsAI{% endblock %}
+{% block meta_desc %}Sign in or create an account to start exploring AI-curated news{% endblock %}
+
+{% block content %}
+<!-- Animated background blobs -->
+<div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+
+<main class="auth-container">
+    <div class="auth-card">
+
+        <!-- Brand -->
+        <div class="auth-logo">
+            <div class="logo-icon" aria-hidden="true">📰</div>
+            <h1>NewsAI</h1>
+            <p>Your AI-powered news aggregator</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="login"    id="tab-login"    role="tab" aria-selected="true"  aria-controls="login-form">Sign In</button>
+            <button class="tab-btn"        data-tab="register" id="tab-register" role="tab" aria-selected="false" aria-controls="register-form">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form active" id="login-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email"    id="login-email"    placeholder="you@example.com" autocomplete="email"             required />
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="••••••••"         autocomplete="current-password"  required />
+            </div>
+            <button type="submit" class="btn-primary" id="login-btn">Sign In</button>
+        </form>
+
+        <!-- Register Form -->
+        <form class="auth-form" id="register-form" role="tabpanel" aria-labelledby="tab-register" novalidate>
+            <div class="form-group">
+                <label for="reg-username">Username</label>
+                <input type="text"     id="reg-username" placeholder="yourname"           autocomplete="username"     required />
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email"    id="reg-email"    placeholder="you@example.com"    autocomplete="email"        required />
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="Min. 6 characters"  autocomplete="new-password"  required />
+            </div>
+            <button type="submit" class="btn-primary" id="register-btn">Create Account</button>
+        </form>
+
+        <!-- Shared error message -->
+        <p class="error-msg" id="error-msg" role="alert" aria-live="polite"></p>
+    </div>
+</main>
+{% endblock %}

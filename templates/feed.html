@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}News Feed — NewsAI{% endblock %}
+{% block meta_desc %}Discover AI-curated, clustered news stories on any topic{% endblock %}
+
+{% block content %}
+<!-- Top Navigation -->
+<nav class="navbar">
+    <a class="navbar-brand" href="/feed">
+        <div class="logo-sm" aria-hidden="true">📰</div>
+        <span>NewsAI</span>
+    </a>
+    <div class="navbar-spacer"></div>
+    <div class="navbar-user">
+        <!-- Daily digest button -->
+        <button class="btn-digest" id="digest-toggle-btn" title="Manage daily digest topics">
+            📬 Daily Digest
+            <span class="sub-count-badge" id="sub-count-badge" style="display:none"></span>
+        </button>
+        <span class="user-badge" id="user-badge">Loading…</span>
+        <button class="btn-logout" id="logout-btn">Logout</button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     DAILY DIGEST DRAWER (slides in from right)
+     ═══════════════════════════════════════════ -->
+<div class="digest-overlay" id="digest-overlay"></div>
+<aside class="digest-drawer" id="digest-drawer" aria-label="Daily digest settings">
+    <div class="drawer-header">
+        <div>
+            <h2 class="drawer-title">📬 Daily Digest</h2>
+            <p class="drawer-subtitle">Select topics for your daily news email</p>
+        </div>
+        <button class="drawer-close" id="drawer-close-btn" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Topic grid -->
+    <div class="topic-grid" id="topic-grid">
+        <p class="topic-loading">Loading topics…</p>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="drawer-actions">
+        <div class="sub-summary" id="sub-summary">0 topics selected</div>
+        <button class="btn-save-subs" id="save-subs-btn">💾 Save Subscriptions</button>
+        <button class="btn-run-digest" id="run-digest-btn" title="Runs the full pipeline and prints digest to server terminal">
+            ▶ Run Digest Now
+        </button>
+    </div>
+</aside>
+
+<!-- Page Layout -->
+<div class="feed-layout">
+
+    <!-- Sidebar — Search History -->
+    <aside class="sidebar" aria-label="Search history">
+        <h3>Search History</h3>
+        <div id="history-list">
+            <p class="sidebar-empty">No searches yet.<br />Try a topic above!</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Hero Search Bar -->
+        <section class="search-hero">
+            <h2>Discover <span>AI-Curated</span> News</h2>
+            <p>Search any topic to get the latest news, clustered and summarised by AI</p>
+            <form class="search-bar-wrapper" id="search-form" role="search">
+                <input
+                    type="search"
+                    id="search-input"
+                    placeholder="Try: AI, Climate, Technology, War…"
+                    autocomplete="off"
+                    aria-label="Search topic"
+                />
+                <button type="submit" id="search-btn">🔍&nbsp;Search</button>
+            </form>
+        </section>
+
+        <!-- Pipeline Loading State -->
+        <div class="loading-container" id="loading-container" aria-live="polite" aria-busy="true">
+            <div class="spinner" role="status"></div>
+            <div class="loading-text">
+                <strong id="loading-title">Running AI Pipeline…</strong>
+                <span id="loading-subtitle">Fresh topics take 30–60 seconds</span>
+            </div>
+            <div class="loading-steps" id="loading-steps">
+                <span class="step-pill" id="step-fetch">📡 Fetching News</span>
+                <span class="step-pill" id="step-scrape">🕷️ Scraping Articles</span>
+                <span class="step-pill" id="step-cluster">🔗 Clustering</span>
+                <span class="step-pill" id="step-title">✍️ Generating Titles</span>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <section id="results-section" aria-label="News results">
+            <div class="results-header">
+                <h3 id="results-topic"></h3>
+                <div class="results-meta">
+                    <span class="badge badge-count" id="results-count"></span>
+                    <span class="badge" id="results-cache"></span>
+                </div>
+            </div>
+            <div class="news-grid" id="news-grid"></div>
+        </section>
+
+        <!-- No Results -->
+        <div class="no-results" id="no-results" role="status">
+            <div class="no-results-icon" aria-hidden="true">🔍</div>
+            <h4>No results found</h4>
+            <p>Try a different topic or check your NewsAPI plan limits.</p>
+        </div>
+
+    </main>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container" id="toast-container" aria-live="assertive"></div>
+{% endblock %}

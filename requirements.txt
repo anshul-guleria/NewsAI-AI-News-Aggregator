@@ -1,0 +1,32 @@
+# ── FastAPI backend ──────────────────────────────────────────
+fastapi
+uvicorn[standard]
+python-multipart
+apscheduler               # background scheduler for daily digest
+
+# ── Flask frontend ───────────────────────────────────────────
+flask
+
+# ── Auth ─────────────────────────────────────────────────────
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1           # passlib 1.7.x is incompatible with bcrypt>=4.1
+
+# ── LangGraph / LangChain ────────────────────────────────────
+langgraph
+langchain-core
+langchain-groq
+
+# ── ML / NLP ─────────────────────────────────────────────────
+sentence-transformers
+scikit-learn
+
+# ── News fetching & scraping ─────────────────────────────────
+requests
+newspaper3k
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv
+tqdm
+rich
+pydantic[email]
